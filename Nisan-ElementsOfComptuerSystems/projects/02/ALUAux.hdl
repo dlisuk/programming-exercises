@@ -1,0 +1,14 @@
+CHIP ALUAux {
+    IN
+        in[16]; // 16-bit input
+    OUT
+        isZero, // outputs true iff in is zero
+        isNeg;  // outputs true iff in is negatie
+    PARTS:
+    Or8Way(in=in[0..7],out=nonZeroLeft);
+    Or8Way(in=in[8..15],out=nonZeroRight);
+    Or(a=nonZeroLeft,b=nonZeroRight,out=nonZero);
+    Not(in=nonZero,out=isZero);
+
+    And(a=in[15],b=in[15],out=isNeg);
+}

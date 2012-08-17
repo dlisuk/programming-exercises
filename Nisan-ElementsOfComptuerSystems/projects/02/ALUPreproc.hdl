@@ -1,0 +1,12 @@
+CHIP ALUPreproc {
+    IN
+        in[16], // 16-bit input
+        z,      // Zero input
+        n;      // Negate the input
+    OUT
+        out[16];
+    PARTS:
+    Mux16(a=in,sel=z,out=xZ);
+    Not16(in=xZ,out=xZp);
+    Mux16(a=xZ,b=xZp,sel=n,out=out);
+}
